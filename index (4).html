@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Eva Ivy English Homework Series</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:#f7f5f0;min-height:100vh}
+
+/* HOME */
+#home{background:linear-gradient(135deg,#0d2137 0%,#1a3a5c 60%,#0a4a6e 100%);min-height:100vh;padding:2.5rem 1.5rem 3rem}
+#home .inner{max-width:640px;margin:0 auto}
+.logo-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.brand-top{color:#f0c040;font-size:.7rem;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
+.brand-main{color:#fff;font-size:1.5rem;font-weight:700}
+.tagline{color:#7ec8e3;font-style:italic;font-size:.95rem;margin:8px 0 2rem}
+.card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.18);border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:12px;cursor:pointer;transition:background .15s,border-color .15s}
+.card:hover{background:rgba(255,255,255,.15);border-color:rgba(240,192,64,.55)}
+.num-badge{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;color:#fff;flex-shrink:0}
+.card-info{flex:1}
+.card-title{color:#fff;font-weight:700;font-size:.97rem;margin-bottom:3px}
+.card-sub{color:#7ec8e3;font-size:.8rem}
+.arrow{color:#f0c040;font-size:1.4rem;line-height:1}
+
+/* WORKSHEET */
+#worksheet{display:none;min-height:100vh;background:#f7f5f0}
+.ws-topbar{background:#1a3a5c;padding:.75rem 1.25rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
+.back-link{color:#7ec8e3;font-size:.9rem;cursor:pointer;background:none;border:none;font-family:inherit;padding:0;margin-right:4px}
+.back-link:hover{color:#fff}
+.topbar-info{flex:1}
+.topbar-eyebrow{color:#f0c040;font-size:.6rem;letter-spacing:.15em;font-weight:700;text-transform:uppercase}
+.topbar-title{color:#fff;font-size:.9rem;font-weight:700}
+.ws-body{max-width:660px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.instr{background:#fff;border:1.5px solid #d8d0c4;border-radius:10px;padding:.9rem 1.1rem;margin-bottom:1.25rem}
+.instr-lbl{color:#1a3a5c;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:5px}
+.instr-txt{color:#3d3530;font-size:.9rem;line-height:1.6}
+.prog-row{display:flex;justify-content:space-between;font-size:.78rem;color:#6b6055;margin-bottom:4px}
+.prog-bg{height:5px;background:#ddd8cf;border-radius:4px;overflow:hidden;margin-bottom:1.1rem}
+.prog-fill{height:100%;background:#1a3a5c;border-radius:4px;width:0%;transition:width .3s}
+.score-box{border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;text-align:center}
+.score-box.pass{background:#e8f5ef;border:2px solid #2d6a4f}
+.score-box.fail{background:#fdf0e8;border:2px solid #b5451b}
+.score-num{font-size:2.2rem;font-weight:700}
+.score-box.pass .score-num{color:#2d6a4f}
+.score-box.fail .score-num{color:#b5451b}
+.score-msg{font-size:.95rem;font-weight:600;margin-top:2px}
+.score-box.pass .score-msg{color:#2d6a4f}
+.score-box.fail .score-msg{color:#7b2d00}
+.retry-btn{margin-top:10px;background:#1a3a5c;color:#fff;border:none;border-radius:8px;padding:.45rem 1.1rem;font-family:inherit;font-size:.88rem;cursor:pointer}
+.q-card{background:#fff;border:1.5px solid #d8d0c4;border-radius:11px;padding:1rem 1.1rem;margin-bottom:.9rem}
+.q-card.q-right{border:2px solid #2d6a4f}
+.q-card.q-wrong{border:2px solid #b5451b}
+.q-head{display:flex;gap:10px;margin-bottom:.75rem}
+.q-bubble{width:26px;height:26px;min-width:26px;border-radius:50%;background:#1a3a5c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;margin-top:2px}
+.q-bubble.bub-right{background:#2d6a4f}
+.q-bubble.bub-wrong{background:#b5451b}
+.q-text{color:#1a1816;font-size:.9rem;line-height:1.65;white-space:pre-line}
+.opts{display:flex;flex-direction:column;gap:7px;margin-left:36px}
+.opt{display:flex;align-items:center;gap:8px;background:#f5f3ee;border:1.5px solid #d0c9be;border-radius:8px;padding:.55rem .85rem;cursor:pointer;font-family:inherit;font-size:.86rem;color:#2c2622;text-align:left;width:100%;transition:background .12s,border-color .12s}
+.opt:hover{background:#e8f0f8;border-color:#1a3a5c;color:#1a3a5c}
+.opt:disabled{cursor:default}
+.opt.o-correct{background:#e8f5ef;border:2px solid #2d6a4f;color:#1a3a25;font-weight:600}
+.opt.o-wrong{background:#fdf0e8;border:2px solid #b5451b;color:#7b2d00;font-weight:600}
+.opt.o-reveal{background:#fffbe8;border:2px solid #c8a010;color:#5a3c00;font-weight:600}
+.opt-ltr{font-weight:700;min-width:16px}
+.opt-icon{margin-left:auto;font-size:.95rem}
+.hint-box{margin-top:8px;margin-left:36px;background:#fffbe8;border:1px solid #c8a010;border-radius:7px;padding:.3rem .8rem;font-size:.8rem;color:#5a3c00;font-weight:600;display:none}
+.submit-area{text-align:center;margin-top:1rem}
+.submit-btn{background:#1a3a5c;color:#fff;border:none;border-radius:10px;padding:.75rem 2.25rem;font-size:.97rem;font-weight:700;font-family:inherit;cursor:pointer}
+.submit-btn:disabled{background:#b0a898;cursor:not-allowed}
+.submit-note{color:#9a8e82;font-size:.78rem;margin-top:6px}
+.home-btn{margin-top:10px;background:none;border:1.5px solid #1a3a5c;color:#1a3a5c;border-radius:10px;padding:.65rem 1.5rem;font-size:.9rem;font-family:inherit;cursor:pointer;display:none}
+.home-btn:hover{background:#1a3a5c;color:#fff}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home">
+  <div class="inner">
+    <div class="logo-row">
+      <svg width="46" height="46" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="12" fill="#1a3a5c"/>
+        <text x="24" y="20" text-anchor="middle" fill="#f0c040" font-size="11" font-weight="700" font-family="Georgia,serif">EVA</text>
+        <text x="24" y="32" text-anchor="middle" fill="#7ec8e3" font-size="11" font-weight="700" font-family="Georgia,serif">IVY</text>
+        <rect x="10" y="34" width="28" height="2" rx="1" fill="#f0c040"/>
+      </svg>
+      <div>
+        <div class="brand-top">Eva Ivy</div>
+        <div class="brand-main">English Homework Series</div>
+      </div>
+    </div>
+    <p class="tagline">Choose a worksheet to begin</p>
+
+    <div class="card" onclick="openWorksheet(0)">
+      <div class="num-badge" style="background:#1a3a5c">1</div>
+      <div class="card-info">
+        <div class="card-title">Prefixes: Pre-, Re-, Sub-, and Mis-</div>
+        <div class="card-sub">20 questions</div>
+      </div>
+      <div class="arrow">&#8250;</div>
+    </div>
+
+    <div class="card" onclick="openWorksheet(1)">
+      <div class="num-badge" style="background:#2d6a4f">2</div>
+      <div class="card-info">
+        <div class="card-title">Correlative Conjunctions</div>
+        <div class="card-sub">20 questions</div>
+      </div>
+      <div class="arrow">&#8250;</div>
+    </div>
+
+    <div class="card" onclick="openWorksheet(2)">
+      <div class="num-badge" style="background:#7b2d8b">3</div>
+      <div class="card-info">
+        <div class="card-title">Persuasive and Opinion Writing</div>
+        <div class="card-sub">20 questions</div>
+      </div>
+      <div class="arrow">&#8250;</div>
+    </div>
+
+    <div class="card" onclick="openWorksheet(3)">
+      <div class="num-badge" style="background:#b5451b">4</div>
+      <div class="card-info">
+        <div class="card-title">Main Idea &#8211; 10 Passages</div>
+        <div class="card-sub">10 questions</div>
+      </div>
+      <div class="arrow">&#8250;</div>
+    </div>
+  </div>
+</div>
+
+<!-- WORKSHEET -->
+<div id="worksheet">
+  <div class="ws-topbar">
+    <button class="back-link" onclick="goHome()">&#8249; Back</button>
+    <svg width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="48" height="48" rx="12" fill="#1a3a5c"/>
+      <text x="24" y="20" text-anchor="middle" fill="#f0c040" font-size="11" font-weight="700" font-family="Georgia,serif">EVA</text>
+      <text x="24" y="32" text-anchor="middle" fill="#7ec8e3" font-size="11" font-weight="700" font-family="Georgia,serif">IVY</text>
+      <rect x="10" y="34" width="28" height="2" rx="1" fill="#f0c040"/>
+    </svg>
+    <div class="topbar-info">
+      <div class="topbar-eyebrow">Eva Ivy English</div>
+      <div class="topbar-title" id="ws-title-bar"></div>
+    </div>
+  </div>
+  <div class="ws-body">
+    <div class="instr">
+      <div class="instr-lbl">Instructions</div>
+      <div class="instr-txt" id="ws-instr-text"></div>
+    </div>
+    <div class="prog-row">
+      <span>Progress</span>
+      <span id="prog-label">0 / 0 answered</span>
+    </div>
+    <div class="prog-bg"><div class="prog-fill" id="prog-fill"></div></div>
+    <div id="score-area" style="display:none"></div>
+    <div id="q-list"></div>
+    <div class="submit-area">
+      <button class="submit-btn" id="submit-btn" disabled onclick="doSubmit()">Submit Worksheet</button>
+      <div class="submit-note" id="submit-note">Answer all questions to submit</div>
+      <button class="home-btn" id="home-btn" onclick="goHome()">&#8592; Back to Worksheets</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var DATA = [
+  {
+    title: "Prefixes: Pre-, Re-, Sub-, and Mis-",
+    instr: "Each question contains a word with one of the prefixes. The word with the prefix is underlined in the question. Choose the best answer (A or B) for each.",
+    qs: [
+      {t:"When you prejudge a situation, you decide before you know all the facts.", o:["A. before you know all the facts","B. after you know all the facts"], a:"A"},
+      {t:"We preheat the oven so it will be ready when we start cooking.", o:["A. heat the oven after cooking","B. heat the oven before cooking"], a:"B"},
+      {t:"A movie trailer is a short preview of what will happen in the film.", o:["A. a view of something after it happens","B. a view of something before it happens"], a:"B"},
+      {t:"The teacher handed out a pretest to assess what students already knew.", o:["A. a test taken before learning new material","B. a test taken after learning new material"], a:"A"},
+      {t:"To plan ahead, they created a prearranged schedule for the school event.", o:["A. arranged after the event","B. arranged before the event"], a:"B"},
+      {t:"We will rewrite the paragraph to fix the mistakes.", o:["A. write it again","B. write it for the first time"], a:"A"},
+      {t:"The cat regrew its lost fur after the illness.", o:["A. grew again","B. grew worse"], a:"A"},
+      {t:"After the fight, they decided to redo the project to improve it.", o:["A. do it again","B. do it once and stop"], a:"A"},
+      {t:"The team rebuilt the model using new materials.", o:["A. destroyed it","B. built it again"], a:"B"},
+      {t:"She rechecked her answers to make sure there were no mistakes.", o:["A. checked again","B. checked for the first time"], a:"A"},
+      {t:"The submarine traveled beneath the surface of the sea.", o:["A. above","B. below"], a:"B"},
+      {t:"A subset of the group was chosen to test the new idea.", o:["A. a larger part","B. a smaller part"], a:"B"},
+      {t:"The scientist noted subatomic particles in the experiment.", o:["A. tiny particles below the atomic level","B. large, visible particles"], a:"A"},
+      {t:"He found a subpar effort from the team.", o:["A. above average","B. below average"], a:"B"},
+      {t:"The medicine caused a subcutaneous rash.", o:["A. a rash under the skin","B. a rash on the skin"], a:"A"},
+      {t:"If you misunderstand someone, you do not understand them correctly.", o:["A. understand incorrectly","B. understand correctly"], a:"A"},
+      {t:"The title of the article was a misprint and changed the meaning of the sentence.", o:["A. a printed error","B. a correct print"], a:"A"},
+      {t:"She mistook the measuring cup for part of a toy set.", o:["A. used it in the right way","B. used it in the wrong way"], a:"B"},
+      {t:"The plan was a misfire and failed to reach the goal.", o:["A. fired correctly","B. fired wrongly or failed"], a:"B"},
+      {t:"The player made a misstep and tripped on the first play.", o:["A. a correct step","B. an incorrect step"], a:"B"}
+    ]
+  },
+  {
+    title: "Correlative Conjunctions",
+    instr: "Read the background for each sentence and choose the best correlative conjunction pair. Select the best option (A or B) for each question.",
+    qs: [
+      {t:"Urban agriculture is increasingly visible in cities. City dwellers are __________ producing crops __________ raising livestock.", o:["A. not only . . . but also","B. either . . . or"], a:"A"},
+      {t:"The festival will feature a wide range of activities. The event will showcase __________ live music __________ craft stalls.", o:["A. both . . . and","B. neither . . . nor"], a:"A"},
+      {t:"When planning the trip, you can travel by train or bus. You can __________ take the express train __________ the regular train to save time.", o:["A. either . . . or","B. not only . . . but also"], a:"A"},
+      {t:"The library offers a rich collection of resources. The library provides __________ books __________ multimedia resources for study.", o:["A. not only . . . but also","B. either . . . or"], a:"A"},
+      {t:"To complete the project on time, you must __________ finish all assignments __________ attend the required briefing.", o:["A. not only . . . but also","B. both . . . and"], a:"A"},
+      {t:"The new policy aims to improve accessibility. The plan seeks __________ affordable access __________ transparent oversight.", o:["A. not only . . . but also","B. neither . . . nor"], a:"A"},
+      {t:"The coach emphasized fitness and cooperation. The squad must demonstrate __________ endurance __________ teamwork.", o:["A. both . . . and","B. not only . . . but also"], a:"A"},
+      {t:"The garden project will yield a variety of vegetables. The plan intends to grow __________ carrots __________ tomatoes.", o:["A. either . . . or","B. not only . . . but also"], a:"B"},
+      {t:"During the orientation, volunteers should check in and out. Volunteers should __________ sign in __________ sign out.", o:["A. not only . . . but also","B. either . . . or"], a:"A"},
+      {t:"The research report requires careful design and thorough analysis. The study demands __________ precise planning __________ rigorous testing.", o:["A. not only . . . but also","B. both . . . and"], a:"A"},
+      {t:"The new customer service policy affects clients and employees. The policy impacts __________ customers __________ employees.", o:["A. neither . . . nor","B. not only . . . but also"], a:"B"},
+      {t:"To qualify for the internship, applicants must __________ meet the minimum requirements __________ demonstrate relevant skills.", o:["A. either . . . or","B. not only . . . but also"], a:"A"},
+      {t:"We have two travel options: car or train. We can __________ go by car __________ take the train.", o:["A. either . . . or","B. not only . . . but also"], a:"A"},
+      {t:"The award honors courage and resilience. The recipient demonstrates __________ bravery __________ perseverance.", o:["A. not only . . . but also","B. both . . . and"], a:"A"},
+      {t:"The presenter will __________ introduce __________ provide a live demonstration of the product.", o:["A. not only . . . but also","B. either . . . or"], a:"A"},
+      {t:"To meet the deadline, the team can __________ work overtime __________ hire temporary staff.", o:["A. either . . . or","B. not only . . . but also"], a:"A"},
+      {t:"The analysis covers __________ risks __________ benefits of the new policy.", o:["A. not only . . . but also","B. both . . . and"], a:"A"},
+      {t:"The conference room setup includes __________ a projector __________ a whiteboard for notes.", o:["A. either . . . or","B. not only . . . but also"], a:"A"},
+      {t:"When deciding on the proposal, the committee will __________ approve __________ reject it based on the evidence.", o:["A. not only . . . but also","B. either . . . or"], a:"B"},
+      {t:"In planning the community garden, the project team will need to __________ coordinate partnerships __________ measure impact.", o:["A. not only . . . but also","B. either . . . or"], a:"A"}
+    ]
+  },
+  {
+    title: "Persuasive and Opinion Writing",
+    instr: "Each question presents two sentences. Choose which sentence reflects a persuasive or opinion stance, a claim, or evidence, as appropriate to the prompt.",
+    qs: [
+      {t:"A school board debates after-school program funding. Which sentence expresses a clear opinion about the value of the program?", o:["A. The district sees a 12% increase in attendance during after-school activities this year.","B. Many parents believe after-school programs improve student engagement and safety."], a:"B"},
+      {t:"In a debate about school uniforms, which option presents a persuasive claim?", o:["A. Uniforms can reduce peer pressure and bullying by minimizing visible socioeconomic differences.","B. The school has a new policy requiring all students to wear uniforms on weekdays."], a:"A"},
+      {t:"When comparing two community health campaigns, which sentence makes a subjective judgment?", o:["A. Campaign A reported a 25% increase in vaccination appointments in three months.","B. Campaign A appears more effective because it uses personal stories that resonate with residents."], a:"B"},
+      {t:"A teacher asks students to defend their position on homework load. Which sentence best states a persuasive claim?", o:["A. Homework assignments should be reduced to two days a week to improve family time.","B. The science behind sleep suggests students perform better with fewer nightly assignments."], a:"A"},
+      {t:"In an editorial about city parks, which sentence argues a policy change?", o:["A. The city plans to install more benches in the main park this year.","B. Expanding park hours and programming will boost neighborhood health, safety, and community pride."], a:"B"},
+      {t:"During a class discussion on school lunches, which sentence presents an opinion rather than a fact?", o:["A. The cafeteria serves pizza every Thursday.","B. Nutritious, affordable meals are essential for all students and should be a higher priority."], a:"B"},
+      {t:"In a persuasive paragraph about renewable energy, which sentence is a strong claim?", o:["A. Solar panels were installed on several school buildings last year.","B. Utilizing renewable energy reduces pollution, saves money over time, and strengthens energy independence."], a:"B"},
+      {t:"When evaluating a persuasive letter about recycling, which sentence expresses evidence?", o:["A. Recycling helps conserve resources for future generations.","B. Our town recycles 40% of its waste, which is higher than last year."], a:"B"},
+      {t:"In an opinion piece about remote learning, which sentence conveys a personal stance?", o:["A. Remote learning can be effective with the right supports and structure.","B. The district has implemented new policies this semester."], a:"A"},
+      {t:"A student compares two sports programs. Which sentence holds a persuasive argument?", o:["A. Program X requires correct technique and offers challenging workouts.","B. Program X helps students stay active and builds teamwork, which many families value."], a:"B"},
+      {t:"In an essay about animal testing, which sentence presents a position?", o:["A. The trial results show significant improvements in medical treatments.","B. I believe animal testing should be replaced with humane, alternative methods whenever possible."], a:"B"},
+      {t:"During a discussion about school start times, which sentence states a claim about outcomes?", o:["A. Delaying start times by 30 minutes aligns with teen sleep research.","B. The bus arrives at 7:15 a.m. every day."], a:"A"},
+      {t:"In a persuasive brief about community gardens, which sentence argues for funding?", o:["A. The garden will provide fresh produce to families in need.","B. Funding is essential because community gardens create jobs, teach kids about nutrition, and improve local ecosystems."], a:"B"},
+      {t:"In an opinion column about transportation, which sentence expresses a preference?", o:["A. The city should expand the bike lane network to reduce traffic.","B. The council approved funding for road repairs last month."], a:"A"},
+      {t:"When evaluating a public health campaign, which sentence offers a claim supported by reasoning?", o:["A. The campaign should prioritize messages that address barriers to vaccination, such as access and misinformation.","B. The campaign includes posters, flyers, and social media ads."], a:"A"},
+      {t:"In a discussion about school testing, which sentence presents a persuasive stance?", o:["A. Standardized tests can provide useful data on student progress.","B. Reducing test frequency would free up time for creative projects and deeper learning."], a:"B"},
+      {t:"In an essay about community involvement, which sentence asserts a value-laden claim?", o:["A. Volunteers logged over 1,000 hours in the last quarter.","B. Civic participation strengthens neighborhoods and should be encouraged through school programs."], a:"B"},
+      {t:"During a debate about digital privacy, which sentence communicates a normative position?", o:["A. The app collects user data to improve recommendations.","B. People have a right to privacy, and companies should minimize data collection."], a:"B"},
+      {t:"In a persuasive note about healthy snacks in schools, which sentence makes a recommendation?", o:["A. The cafeteria offers fruit and yogurt as daily options.","B. Schools should replace sugary snacks with fruit, nuts, and water to support student health."], a:"B"},
+      {t:"In a paragraph about community safety, which sentence argues for a policy change?", o:["A. The police department completed a crime statistics report for the last year.","B. Increasing nighttime lighting and community policing initiatives will likely reduce crime and improve residents' sense of safety."], a:"B"}
+    ]
+  },
+  {
+    title: "Main Idea \u2013 10 Passages",
+    instr: "Read each short passage. After reading, choose the option that best states the main idea. Each question has three choices (A, B, or C).",
+    qs: [
+      {t:"Last Friday, Ms. Rivera's class visited the town's community garden. Students walked between rows of lettuce, tomatoes, and herbs, noting how the beds were built and watered. The gardener explained composting and how kitchen scraps become rich soil. Back in class, students kept notebooks, recording which plants grew best with the sun on the east side and which needed extra mulch on cooler days. They compared their observations with last year's garden data and discussed how insects helped pollinate flowers. The overall project aimed to teach responsibility, patience, and teamwork. By the end of the week, the class harvested lettuce for a local food pantry.\n\nWhat is the main idea of this passage?", o:["A. The class harvested lettuce for a food pantry.","B. The garden project teaches science skills and teamwork in a community setting.","C. The gardener explained composting to the students."], a:"B"},
+      {t:"Two weeks ago, the library added a new Reading Buddies program. Fifth graders were paired with younger students to encourage reading aloud and discuss stories. Each week, buddies meet in a quiet corner with a shelf of popular chapter books. The older students practice listening, asking questions, and suggesting ideas while the younger ones gain confidence. The program also uses short graphic novels to help struggling readers. Librarians monitor progress and celebrate improvements with small certificates.\n\nWhat is the main idea of this passage?", o:["A. Younger students must read aloud with older buddies every day.","B. The Reading Buddies program helps older students mentor younger readers and builds confidence.","C. The library hosts graphic novels for all readers."], a:"B"},
+      {t:"A neighborhood recycling drive brought families together on a sunny Saturday. Volunteers sorted plastic, paper, and aluminum while explaining why each material matters for the environment. Children practiced lifting boxes carefully and labeling bags. The organizers set up a booth with tips on reducing waste at home and showed simple DIY crafts from recycled materials. The event highlighted how local actions, even small ones, can protect rivers and parks for future generations.\n\nWhat is the main idea of this passage?", o:["A. The recycling drive taught kids how to sort materials and share eco-friendly tips.","B. The event sold crafts made from recycled materials.","C. The community map tracked river pollution levels."], a:"A"},
+      {t:"During the science fair, students tested whether sunlight or shade affected plant growth. They planted identical seeds in two labeled pots and kept careful notes about germination times, height, and leaf color. Students measured soil moisture, temperature, and daily sunlight. They compared their data with a control plant. After weeks of observation, they created a graph showing which conditions produced the tallest plants. The project taught how to design fair tests, record data, and draw conclusions.\n\nWhat is the main idea of this passage?", o:["A. The science fair showcased a graph about plant heights.","B. The experiment demonstrates how to conduct a fair test and analyze results.","C. The students watered the plants every day."], a:"B"},
+      {t:"A city park was chosen for a two-day restoration project. Volunteers removed invasive weeds, planted native grasses, and painted picnic benches. A local ranger provided information about wildlife habitat and why native plants are important for bees and birds. Groups discussed how to maintain the park and report any problems. The overall effort not only improved beauty and usability but also increased community pride and awareness of local ecosystems.\n\nWhat is the main idea of this passage?", o:["A. The park restoration improved both appearance and awareness of local ecosystems.","B. Rangers gave talks about wildlife in the park.","C. Volunteers painted benches and removed weeds."], a:"A"},
+      {t:"A robotics club built a small line-following robot for the regional competition. Students brainstormed ideas, drafted a plan, and assigned roles for coding, wiring, and testing. They used basic sensors to detect the line and programmed the robot to correct its path. Several tests revealed timing issues, so the team adjusted the code and hardware. They documented every change in a project notebook and supported each other through setbacks. The experience emphasized collaboration, problem-solving, and perseverance.\n\nWhat is the main idea of this passage?", o:["A. The team won the regional robotics competition.","B. The robotics project focuses on teamwork and solving problems to improve the robot.","C. The club met weekly to code online."], a:"B"},
+      {t:"A school garden club organized a seed swap to encourage students to reuse and share. Families donated seeds saved from last year, and club members created simple seed starter kits with soil and small cups. The swap included a station with tips on proper planting, watering, and spacing. Attendees learned that saving seeds helps reduce costs and supports biodiversity. The event also awarded small prizes for the most unusual seed variety.\n\nWhat is the main idea of this passage?", o:["A. The seed swap helps families reuse seeds and promotes biodiversity.","B. The garden club awarded prizes for seed varieties.","C. Seeds were sold to raise funds for the club."], a:"A"},
+      {t:"A reading club explored different viewpoints on a local issue: preserving a historic mill versus building a new community center. Members read articles, listened to a guest speaker, and debated with civility. They practiced identifying facts, opinions, and persuasive language. Although opinions varied, participants agreed that listening carefully is essential to understanding complex problems. The session ended with a plan to write letters to the town council.\n\nWhat is the main idea of this passage?", o:["A. The group practiced civility while debating a local issue and considered multiple viewpoints.","B. The town council will decide to build a new community center.","C. The historic mill must be preserved at all costs."], a:"A"},
+      {t:"A science notebook project asked students to describe weather patterns over a month. They recorded daily temperature, precipitation, and wind speed, then looked for patterns. The teacher helped them connect weather changes to larger climate trends using simple graphs. Students discussed how weather affects daily life, from clothing choices to outdoor activities. The activity showed that careful observation can reveal reliable information.\n\nWhat is the main idea of this passage?", o:["A. Weather patterns can be observed and recorded to understand climate trends.","B. The class wore weather-appropriate clothing every day.","C. The teacher taught about different types of precipitation."], a:"A"},
+      {t:"A geography club researched the rivers that flow near their town. They traced watersheds, measured water quality with simple test strips, and interviewed local anglers about fishing conditions. The club members compiled a map showing sources, pollution risks, and safe access points for recreation. They presented their findings at a school assembly, emphasizing how students can monitor and protect local waterways. The project connected science to community involvement.\n\nWhat is the main idea of this passage?", o:["A. The geography club created a map of local rivers and discussed protection measures.","B. The town has several good fishing spots.","C. The students tested water quality with professional equipment."], a:"A"}
+    ]
+  }
+];
+
+var cur = { ws: -1, answers: {}, submitted: false };
+
+function openWorksheet(idx) {
+  cur.ws = idx;
+  cur.answers = {};
+  cur.submitted = false;
+
+  var ws = DATA[idx];
+  document.getElementById('ws-title-bar').textContent = ws.title;
+  document.getElementById('ws-instr-text').textContent = ws.instr;
+  document.getElementById('score-area').style.display = 'none';
+  document.getElementById('score-area').innerHTML = '';
+  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('submit-btn').style.display = 'inline-block';
+  document.getElementById('submit-note').style.display = 'block';
+  document.getElementById('home-btn').style.display = 'none';
+  document.getElementById('prog-fill').style.width = '0%';
+  document.getElementById('prog-label').textContent = '0 / ' + ws.qs.length + ' answered';
+
+  var list = document.getElementById('q-list');
+  list.innerHTML = '';
+
+  for (var i = 0; i < ws.qs.length; i++) {
+    var q = ws.qs[i];
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'qcard-' + i;
+
+    var head = document.createElement('div');
+    head.className = 'q-head';
+
+    var bubble = document.createElement('div');
+    bubble.className = 'q-bubble';
+    bubble.id = 'qbub-' + i;
+    bubble.textContent = String(i + 1);
+
+    var qtxt = document.createElement('div');
+    qtxt.className = 'q-text';
+    qtxt.textContent = q.t;
+
+    head.appendChild(bubble);
+    head.appendChild(qtxt);
+
+    var opts = document.createElement('div');
+    opts.className = 'opts';
+
+    for (var j = 0; j < q.o.length; j++) {
+      var optText = q.o[j];
+      var ltr = optText.charAt(0);
+      (function(qi, l, ot) {
+        var btn = document.createElement('button');
+        btn.className = 'opt';
+        btn.id = 'opt-' + qi + '-' + l;
+        btn.type = 'button';
+        btn.innerHTML =
+          '<span class="opt-ltr">' + l + '.</span>' +
+          '<span style="flex:1">' + ot.substring(3) + '</span>' +
+          '<span class="opt-icon" id="icon-' + qi + '-' + l + '"></span>';
+        btn.addEventListener('click', function() { pickAnswer(qi, l); });
+        opts.appendChild(btn);
+      })(i, ltr, optText);
+    }
+
+    var hint = document.createElement('div');
+    hint.className = 'hint-box';
+    hint.id = 'hint-' + i;
+
+    card.appendChild(head);
+    card.appendChild(opts);
+    card.appendChild(hint);
+    list.appendChild(card);
+  }
+
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('worksheet').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function pickAnswer(qi, ltr) {
+  if (cur.submitted) return;
+  if (cur.answers[qi] !== undefined) return;
+
+  cur.answers[qi] = ltr;
+  var q = DATA[cur.ws].qs[qi];
+  var isRight = ltr === q.a;
+
+  var chosenBtn = document.getElementById('opt-' + qi + '-' + ltr);
+  chosenBtn.className = 'opt ' + (isRight ? 'o-correct' : 'o-wrong');
+  document.getElementById('icon-' + qi + '-' + ltr).textContent = isRight ? '\u2713' : '\u2717';
+
+  for (var j = 0; j < q.o.length; j++) {
+    var b = document.getElementById('opt-' + qi + '-' + q.o[j].charAt(0));
+    b.disabled = true;
+  }
+
+  if (!isRight) {
+    var correctBtn = document.getElementById('opt-' + qi + '-' + q.a);
+    correctBtn.className = 'opt o-reveal';
+    document.getElementById('icon-' + qi + '-' + q.a).textContent = '\u2605';
+    var correctOpt = '';
+    for (var k = 0; k < q.o.length; k++) {
+      if (q.o[k].charAt(0) === q.a) { correctOpt = q.o[k].substring(3); break; }
+    }
+    var hintEl = document.getElementById('hint-' + qi);
+    hintEl.textContent = '\u2605 Correct answer: ' + q.a + ' \u2014 ' + correctOpt;
+    hintEl.style.display = 'block';
+  }
+
+  var total = DATA[cur.ws].qs.length;
+  var done = Object.keys(cur.answers).length;
+  document.getElementById('prog-label').textContent = done + ' / ' + total + ' answered';
+  document.getElementById('prog-fill').style.width = Math.round(done / total * 100) + '%';
+
+  var allDone = done === total;
+  document.getElementById('submit-btn').disabled = !allDone;
+  if (allDone) document.getElementById('submit-note').style.display = 'none';
+}
+
+function doSubmit() {
+  if (cur.submitted) return;
+  cur.submitted = true;
+
+  var ws = DATA[cur.ws];
+  var total = ws.qs.length;
+  var correct = 0;
+  for (var i = 0; i < ws.qs.length; i++) {
+    if (cur.answers[i] === ws.qs[i].a) correct++;
+  }
+  var pct = Math.round(correct / total * 100);
+  var pass = pct >= 70;
+
+  for (var i = 0; i < ws.qs.length; i++) {
+    var q = ws.qs[i];
+    var isRight = cur.answers[i] === q.a;
+    document.getElementById('qcard-' + i).className = 'q-card ' + (isRight ? 'q-right' : 'q-wrong');
+    document.getElementById('qbub-' + i).className = 'q-bubble ' + (isRight ? 'bub-right' : 'bub-wrong');
+    if (!isRight) {
+      var cb = document.getElementById('opt-' + i + '-' + q.a);
+      if (cb) {
+        cb.className = 'opt o-reveal';
+        document.getElementById('icon-' + i + '-' + q.a).textContent = '\u2605';
+      }
+    }
+  }
+
+  var msg = pct >= 90 ? 'Excellent!' : pct >= 70 ? 'Good work!' : pct >= 50 ? 'Keep practicing!' : 'Review and try again!';
+  var area = document.getElementById('score-area');
+  area.className = 'score-box ' + (pass ? 'pass' : 'fail');
+  area.innerHTML =
+    '<div class="score-num">' + correct + '/' + total + '</div>' +
+    '<div class="score-msg">' + pct + '% \u2014 ' + msg + '</div>' +
+    '<button class="retry-btn" onclick="openWorksheet(' + cur.ws + ')">Try Again</button>';
+  area.style.display = 'block';
+
+  document.getElementById('submit-btn').style.display = 'none';
+  document.getElementById('submit-note').style.display = 'none';
+  document.getElementById('home-btn').style.display = 'inline-block';
+  window.scrollTo(0, 0);
+}
+
+function goHome() {
+  document.getElementById('worksheet').style.display = 'none';
+  document.getElementById('home').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
